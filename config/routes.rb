@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   scope "/:locale" do
     resources :companies
     resources :tenants
+    resources :users
 
   end
 end
