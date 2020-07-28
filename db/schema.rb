@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_16_043426) do
+ActiveRecord::Schema.define(version: 2020_07_22_040707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "companies", force: :cascade do |t|
+    t.jsonb "name"
+    t.jsonb "meta_description"
+    t.jsonb "about"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tenants", force: :cascade do |t|
+    t.jsonb "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "tenant_key"
+    t.index ["tenant_key"], name: "tenant_key_code", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: ""
