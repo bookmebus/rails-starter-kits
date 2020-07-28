@@ -33,6 +33,7 @@ gem 'interactor-rails'
 gem 'ros-apartment', require: 'apartment'
 
 gem 'translateable'
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
