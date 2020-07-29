@@ -13,19 +13,21 @@
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/users", type: :request do
-  # User. As you add validations to User, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:profile_pic) do
+    file = Rails.root.join('spec', 'support', 'assets', 'profile_pic.jpg')
+
+    ActiveStorage::Blob.create_after_upload!(
+      io: File.open(file, 'rb'),
+      filename: 'profile_pic.jpg',
+      content_type: 'image/jpeg' # Or figure it out from `name` if you have non-JPEGs
+    ).signed_id
+  end
+
+  let!(:user) { create(:user) }
 
   describe "GET /index" do
     it "renders a successful response" do
-      User.create! valid_attributes
       get users_url
       expect(response).to be_successful
     end
@@ -33,8 +35,7 @@ RSpec.describe "/users", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      user = User.create! valid_attributes
-      get user_url(user)
+      get user_url(user, locale: :en)
       expect(response).to be_successful
     end
   end
@@ -48,22 +49,37 @@ RSpec.describe "/users", type: :request do
 
   describe "GET /edit" do
     it "render a successful response" do
-      user = User.create! valid_attributes
-      get edit_user_url(user)
+      get edit_user_url(user, locale: :en)
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
+
       it "creates a new User" do
+
+        valid_attrs = build(:user).attributes.slice('email', 'phone_number')
+
+        valid_attrs =  valid_attrs.merge(
+          profile_pic: profile_pic,
+          password: '123456789'
+        )
+
         expect {
-          post users_url, params: { user: valid_attributes }
+          post users_url(locale: :en), params: { user: valid_attrs }
         }.to change(User, :count).by(1)
       end
 
       it "redirects to the created user" do
-        post users_url, params: { user: valid_attributes }
+        valid_attrs = build(:user).attributes.slice('email', 'phone_number')
+
+        valid_attrs =  valid_attrs.merge(
+          profile_pic: profile_pic,
+          password: '123456789'
+        )
+
+        post users_url(locale: :en), params: { user: valid_attrs }
         expect(response).to redirect_to(user_url(User.last))
       end
     end
@@ -71,12 +87,12 @@ RSpec.describe "/users", type: :request do
     context "with invalid parameters" do
       it "does not create a new User" do
         expect {
-          post users_url, params: { user: invalid_attributes }
+          post users_url(locale: :en), params: { user: {password: nil} }
         }.to change(User, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post users_url, params: { user: invalid_attributes }
+        post users_url(locale: :en), params: { user: {password: nil} }
         expect(response).to be_successful
       end
     end
@@ -84,20 +100,16 @@ RSpec.describe "/users", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
 
       it "updates the requested user" do
-        user = User.create! valid_attributes
-        patch user_url(user), params: { user: new_attributes }
+        patch user_url(user, locale: :en), params: { user: { first_name: 'Joe', last_name: 'Ann' } }
         user.reload
-        skip("Add assertions for updated state")
+        expect(user.first_name).to eq 'Joe'
+        expect(user.last_name).to eq 'Ann'
       end
 
       it "redirects to the user" do
-        user = User.create! valid_attributes
-        patch user_url(user), params: { user: new_attributes }
+        patch user_url(user, locale: :en), params: { user: { first_name: 'Joe', last_name: 'Ann' } }
         user.reload
         expect(response).to redirect_to(user_url(user))
       end
@@ -105,8 +117,7 @@ RSpec.describe "/users", type: :request do
 
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        user = User.create! valid_attributes
-        patch user_url(user), params: { user: invalid_attributes }
+        patch user_url(user, locale: :en), params: { user: {email: nil} }
         expect(response).to be_successful
       end
     end
@@ -114,15 +125,13 @@ RSpec.describe "/users", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested user" do
-      user = User.create! valid_attributes
       expect {
-        delete user_url(user)
+        delete user_url(user, locale: :en)
       }.to change(User, :count).by(-1)
     end
 
     it "redirects to the users list" do
-      user = User.create! valid_attributes
-      delete user_url(user)
+      delete user_url(user, locale: :en)
       expect(response).to redirect_to(users_url)
     end
   end

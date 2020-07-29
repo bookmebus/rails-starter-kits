@@ -13,19 +13,13 @@
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/tenants", type: :request do
-  # Tenant. As you add validations to Tenant, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let!(:tenant) { create(:tenant) }
 
   describe "GET /index" do
     it "renders a successful response" do
-      Tenant.create! valid_attributes
+      create(:tenant)
+
       get tenants_url
       expect(response).to be_successful
     end
@@ -33,8 +27,7 @@ RSpec.describe "/tenants", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      tenant = Tenant.create! valid_attributes
-      get tenant_url(tenant)
+      get tenant_url(tenant, locale: :en)
       expect(response).to be_successful
     end
   end
@@ -48,8 +41,7 @@ RSpec.describe "/tenants", type: :request do
 
   describe "GET /edit" do
     it "render a successful response" do
-      tenant = Tenant.create! valid_attributes
-      get edit_tenant_url(tenant)
+      get edit_tenant_url(tenant, locale: :en)
       expect(response).to be_successful
     end
   end
@@ -57,13 +49,15 @@ RSpec.describe "/tenants", type: :request do
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Tenant" do
+        build_tenant = build(:tenant)
         expect {
-          post tenants_url, params: { tenant: valid_attributes }
+          post tenants_url, params: { tenant: { name: build_tenant.name, tenant_key: build_tenant.tenant_key } }
         }.to change(Tenant, :count).by(1)
       end
 
       it "redirects to the created tenant" do
-        post tenants_url, params: { tenant: valid_attributes }
+        build_tenant = build(:tenant)
+        post tenants_url, params: { tenant: { name: build_tenant.name, tenant_key: build_tenant.tenant_key } }
         expect(response).to redirect_to(tenant_url(Tenant.last))
       end
     end
@@ -71,12 +65,12 @@ RSpec.describe "/tenants", type: :request do
     context "with invalid parameters" do
       it "does not create a new Tenant" do
         expect {
-          post tenants_url, params: { tenant: invalid_attributes }
+          post tenants_url, params: { tenant: {name: ''} }
         }.to change(Tenant, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post tenants_url, params: { tenant: invalid_attributes }
+        post tenants_url, params: { tenant: {name: ''} }
         expect(response).to be_successful
       end
     end
@@ -84,20 +78,16 @@ RSpec.describe "/tenants", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
 
       it "updates the requested tenant" do
-        tenant = Tenant.create! valid_attributes
-        patch tenant_url(tenant), params: { tenant: new_attributes }
+        patch tenant_url(tenant, locale: :en), params: { tenant: {name: 'update-name'} }
         tenant.reload
-        skip("Add assertions for updated state")
+       
+        expect(tenant.name).to eq 'update-name'
       end
 
       it "redirects to the tenant" do
-        tenant = Tenant.create! valid_attributes
-        patch tenant_url(tenant), params: { tenant: new_attributes }
+        patch tenant_url(tenant, locale: :en), params: { tenant: {name: 'update-name'} }
         tenant.reload
         expect(response).to redirect_to(tenant_url(tenant))
       end
@@ -105,8 +95,7 @@ RSpec.describe "/tenants", type: :request do
 
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        tenant = Tenant.create! valid_attributes
-        patch tenant_url(tenant), params: { tenant: invalid_attributes }
+        patch tenant_url(tenant, locale: :en), params: { tenant: {name: ''} }
         expect(response).to be_successful
       end
     end
@@ -114,15 +103,13 @@ RSpec.describe "/tenants", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested tenant" do
-      tenant = Tenant.create! valid_attributes
       expect {
-        delete tenant_url(tenant)
+        delete tenant_url(tenant, locale: :en)
       }.to change(Tenant, :count).by(-1)
     end
 
     it "redirects to the tenants list" do
-      tenant = Tenant.create! valid_attributes
-      delete tenant_url(tenant)
+      delete tenant_url(tenant, locale: :en)
       expect(response).to redirect_to(tenants_url)
     end
   end

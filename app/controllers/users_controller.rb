@@ -24,7 +24,7 @@ class UsersController < FrontEndController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    @user = User.new(create_params)
 
     respond_to do |format|
       if @user.save
@@ -41,7 +41,7 @@ class UsersController < FrontEndController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(update_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -67,8 +67,12 @@ class UsersController < FrontEndController
       @user = User.find(params[:id])
     end
 
+    def create_params
+      params.require(:user).permit(:first_name, :last_name, :display_name,:email, :phone_number, :password, :password_confirmation, :profile_pic)
+    end
+
     # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:user, :email, :phone_number, :password, :password_confirmation, :profile_pic)
+    def update_params
+      create_params.except(:password, :password_confirmation)
     end
 end
