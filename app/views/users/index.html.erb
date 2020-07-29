@@ -5,6 +5,9 @@
 <table>
   <thead>
     <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Display name</th>
       <th>Email</th>
       <th>Phone Number</th>
       <th>Profile</th>
@@ -16,6 +19,9 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= user.first_name%></td>
+        <td><%= user.last_name%></td>
+        <td><%= user.display_name%></td>
         <td><%= user.email%></td>
         <td><%= user.phone_number%></td>
         <td><%= image_tag user.profile_pic.variant(resize_to_limit: [30, 30]), width: '30px' if user.profile_pic.attached? %></td>

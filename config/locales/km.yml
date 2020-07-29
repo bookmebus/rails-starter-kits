@@ -1,0 +1,7 @@
+km:
+  activerecord:
+    errors:
+      models:
+        role:
+          attributes:
+            name: "blank"

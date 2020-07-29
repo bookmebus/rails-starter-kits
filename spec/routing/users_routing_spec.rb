@@ -20,7 +20,7 @@ RSpec.describe UsersController, type: :routing do
 
 
     it "routes to #create" do
-      expect(post: "/users").to route_to("users#create")
+      expect(post: "/en/users").to route_to("users#create", locale: 'en')
     end
 
     it "routes to #update via PUT" do

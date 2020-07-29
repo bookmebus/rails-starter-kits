@@ -13,19 +13,17 @@
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/companies", type: :request do
-  # Company. As you add validations to Company, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let!(:company) { create(:company) }
+  let!(:valid_attrs) do
+    {
+      name:'company-1',
+      meta_description: 'company-1',
+      about: 'company-1',
+    }
+  end
 
   describe "GET /index" do
     it "renders a successful response" do
-      Company.create! valid_attributes
       get companies_url
       expect(response).to be_successful
     end
@@ -33,8 +31,7 @@ RSpec.describe "/companies", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      company = Company.create! valid_attributes
-      get company_url(company)
+      get company_url(company, locale: 'en')
       expect(response).to be_successful
     end
   end
@@ -48,8 +45,7 @@ RSpec.describe "/companies", type: :request do
 
   describe "GET /edit" do
     it "render a successful response" do
-      company = Company.create! valid_attributes
-      get edit_company_url(company)
+      get edit_company_url(company, locale: :en)
       expect(response).to be_successful
     end
   end
@@ -58,25 +54,27 @@ RSpec.describe "/companies", type: :request do
     context "with valid parameters" do
       it "creates a new Company" do
         expect {
-          post companies_url, params: { company: valid_attributes }
+          post companies_url(locale: :en), params: { company: valid_attrs }
         }.to change(Company, :count).by(1)
       end
 
       it "redirects to the created company" do
-        post companies_url, params: { company: valid_attributes }
+        post companies_url(locale: :en), params: { company: valid_attrs }
         expect(response).to redirect_to(company_url(Company.last))
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new Company" do
+        invalid_attrs = valid_attrs.slice(:name)
+
         expect {
-          post companies_url, params: { company: invalid_attributes }
+          post companies_url, params: { company: invalid_attrs }
         }.to change(Company, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post companies_url, params: { company: invalid_attributes }
+        post companies_url, params: { company: {name: ''} }
         expect(response).to be_successful
       end
     end
@@ -84,20 +82,18 @@ RSpec.describe "/companies", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) do
+        {about: 'update company about us'}
+      end
 
       it "updates the requested company" do
-        company = Company.create! valid_attributes
-        patch company_url(company), params: { company: new_attributes }
+        patch company_url(company, locale: :en), params: { company: new_attributes }
         company.reload
-        skip("Add assertions for updated state")
+        expect(company.about).to eq 'update company about us'
       end
 
       it "redirects to the company" do
-        company = Company.create! valid_attributes
-        patch company_url(company), params: { company: new_attributes }
+        patch company_url(company, locale: :en), params: { company: new_attributes }
         company.reload
         expect(response).to redirect_to(company_url(company))
       end
@@ -105,8 +101,7 @@ RSpec.describe "/companies", type: :request do
 
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        company = Company.create! valid_attributes
-        patch company_url(company), params: { company: invalid_attributes }
+        patch company_url(company, locale: :en), params: { company: { name: '' } }
         expect(response).to be_successful
       end
     end
@@ -114,15 +109,13 @@ RSpec.describe "/companies", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested company" do
-      company = Company.create! valid_attributes
       expect {
-        delete company_url(company)
+        delete company_url(company, locale: :en)
       }.to change(Company, :count).by(-1)
     end
 
     it "redirects to the companies list" do
-      company = Company.create! valid_attributes
-      delete company_url(company)
+      delete company_url(company, locale: :en)
       expect(response).to redirect_to(companies_url)
     end
   end

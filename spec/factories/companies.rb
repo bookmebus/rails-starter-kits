@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :company do
-    name { "" }
-    meta_description { "" }
-    about { "" }
+    sequence(:name) { |n| "company_#{n}" }
+    sequence(:meta_description) { |n| "description-#{n}" }
+    sequence(:about) { |n| "about-#{n}" }
   end
 end
