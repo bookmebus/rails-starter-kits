@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :companies
     resources :tenants
     resources :users
-
   end
+
+  get '/:locale' => 'home#index'
 end

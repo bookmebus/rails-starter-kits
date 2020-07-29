@@ -21,7 +21,7 @@ module Ticketing
     
     config.action_mailer.default_url_options = { host: ENV['HOST'] }
 
-    config.i18n.available_locales = %i[en km th vi zh]
+    config.i18n.available_locales = %i[ en es km th vi zh ]
     config.i18n.default_locale = :en
     
     config.active_storage.service = :amazon

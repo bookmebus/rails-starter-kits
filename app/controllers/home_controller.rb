@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class HomeController < FrontEndController
   def index
     render json: {}
   end
