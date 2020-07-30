@@ -29,9 +29,9 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
+vi:
   models:
-    user: "user"
+    user: "người sử dụng"
     tenant: "tenant"
     role: "role"
     address: "address"
@@ -65,8 +65,7 @@ en:
 
     pickup_address: "Pickup address"
     delivery_address: "Delivery address"
-
-    items_count: "Item count"
+    items_count: "Tổng số"
 
   errors:
     messages:

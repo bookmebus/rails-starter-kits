@@ -1,0 +1,96 @@
+<%= form_with(model: quote_submission, local: true) do |form| %>
+
+  <h2><%=t('models.quote/pickup_address')%></h2>
+
+  <%=form.fields_for :pickup_address do |pickup_form| %>
+    <div class="field">
+      <%= pickup_form.label :name, t('attributes.pickup_address') %>
+      <%= pickup_form.text_field :name, value: quote_submission.pickup_address.name %>
+    </div>
+
+    <div>
+      <%=pickup_form.hidden_field :id %>
+      <%=pickup_form.hidden_field :lat, value: '10' %>
+      <%=pickup_form.hidden_field :lon, value: '102' %>
+    </div>
+  <% end %>
+
+  <h2><%= t('models.quote/delivery_address')%></h2>
+  <%=form.fields_for :delivery_address do |delivery_form| %>
+    <div class="field">
+      <%= delivery_form.label :name, t('attributes.delivery_address') %>
+      <%= delivery_form.text_field :name, value: quote_submission.delivery_address.name  %>
+    </div>
+
+    <div>
+      <%=delivery_form.hidden_field :id %>
+      <%=delivery_form.hidden_field :lat, value: '17' %>
+      <%=delivery_form.hidden_field :lon, value: '90.39' %>
+    </div>
+  <% end %>
+
+  <h2><%= t('models.quote/shipment_item')%></h2>
+
+  <%=form.fields_for :shipment_items, quote_submission.shipment_items  do |shipment_item_form| %>
+    <%= shipment_item_form.hidden_field :id %>
+    <div class="field">
+      <%= shipment_item_form.label :width %>
+      <%= shipment_item_form.text_field :width %>
+    </div>
+
+    <div class="field">
+      <%= shipment_item_form.label :length %>
+      <%= shipment_item_form.text_field :length %>
+    </div>
+    
+    <div class="field">
+      <%= shipment_item_form.label :height %>
+      <%= shipment_item_form.text_field :height %>
+    </div>
+
+    <div class="field">
+      <%= shipment_item_form.label :dimension_unit %>
+      <%= shipment_item_form.select :dimension_unit, Quote::ShipmentItem.dimensional_units %>
+    </div>
+
+    <div class="field">
+      <%= shipment_item_form.label :weight %>
+      <%= shipment_item_form.text_field :weight %>
+    </div>
+
+    <div class="field">
+      <%= shipment_item_form.label :weight_unit %>
+      <%= shipment_item_form.select :weight_unit, Quote::ShipmentItem.weight_units %>
+    </div>
+    
+  <% end %>
+
+  <h2><%= t('models.quote/contact')%></h2>
+  <%= form.fields_for :contact do |contact_form| %>
+    <%= contact_form.hidden_field :id %>
+    <div class="field">
+      <%= contact_form.label :name %>
+      <%= contact_form.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= contact_form.label :email %>
+      <%= contact_form.text_field :email %>
+    </div>
+
+    <div class="field">
+      <%= contact_form.label :phone_number %>
+      <%= contact_form.text_field :phone_number %>
+    </div>
+
+    <div class="field">
+      <%= contact_form.label :title %>
+      <%= contact_form.select :title, Quote::Contact.honorific_titles %>
+    </div>
+  <% end %>
+
+
+  <div class="actions">
+    <%= form.submit(t("common.actions.save")) %>
+  </div>
+<% end %>

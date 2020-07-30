@@ -15,7 +15,7 @@
 RSpec.describe "/users", type: :request do
 
   let(:profile_pic) do
-    file = Rails.root.join('spec', 'support', 'assets', 'profile_pic.jpg')
+    file = Rails.root.join('spec', 'support', 'assets', 'user', 'profile_pic.jpg')
 
     ActiveStorage::Blob.create_after_upload!(
       io: File.open(file, 'rb'),
