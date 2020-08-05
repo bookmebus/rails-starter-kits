@@ -16,7 +16,10 @@ RSpec.describe "/quote/submissions", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      create(:quote_submission)
+      submission = create(:quote_submission)
+      create(:quote_contact, submission: submission)
+      create(:quote_delivery_address, submission: submission)
+      create(:quote_pickup_address, submission: submission)
 
       get quote_submissions_url
       expect(response).to be_successful
