@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%=t("models.quote/submission")%></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= t('attributes.name') %></th>
+      <th><%= t('models.quote/contact') %></th>
+      <th><%= t('attributes.items_count') %> </th>
+      <th><%= t('attributes.pickup_address')%></th>
+      <th><%= t('attributes.delivery_address')%></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @quote_submissions.each do |quote_submission| %>
+      <tr>
+        <td><%= quote_submission.contact.name%></td>
+        <td><%= quote_submission.contact.display_contact%></td>
+        <td><%= quote_submission.shipment_items_count%></td>
+
+        <td><%= quote_submission.pickup_address.name%></td>
+        <td><%= quote_submission.delivery_address.name%></td>
+        <td><%= link_to t('common.actions.show'), quote_submission %></td>
+        <td><%= link_to t('common.actions.edit'), edit_quote_submission_path(quote_submission) %></td>
+        <td><%= link_to t('common.actions.destroy'), quote_submission, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to t('common.actions.new'), new_quote_submission_path %>
