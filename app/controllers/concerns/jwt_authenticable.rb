@@ -1,4 +1,4 @@
-module JWTAuthenticable
+module JwtAuthenticable
   extend ActiveSupport::Concern
 
   included do
@@ -7,13 +7,12 @@ module JWTAuthenticable
 
   def authenticate_app!
     jwt_token = request.headers["Authorization"]
-
     raise UnauthorizedError if jwt_token.blank?
 
     (_, encodedJWT ) = jwt_token.split('Bearer ')
 
     begin
-      payload = JWTGenerator.decode(encodedJWT)
+      payload = JwtGenerator.decode(encodedJWT)
 
       # we can get any claim from here: app_id:, role:, user_id: to further restrict access
       payload

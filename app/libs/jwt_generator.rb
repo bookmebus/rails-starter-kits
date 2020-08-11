@@ -1,4 +1,5 @@
-class JWTGenerator
+class JwtGenerator
+  # "jti"=>"c4b5", "display_name"=>nil, "sub"=>"1", "scp"=>"api_user", "aud"=>nil, "iat"=>1597058071, "exp"=>1597058971
   def self.encode(payload)
     payload[:exp] = expired_time if payload[:exp].blank?
     

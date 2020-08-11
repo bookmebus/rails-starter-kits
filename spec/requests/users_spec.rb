@@ -117,7 +117,7 @@ RSpec.describe "/users", type: :request do
 
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        patch user_url(user, locale: :en), params: { user: {email: nil} }
+        patch user_url(user, locale: :en), params: { user: {email: nil, phone_number: nil} }
         expect(response).to be_successful
       end
     end

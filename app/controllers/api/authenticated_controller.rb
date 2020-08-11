@@ -1,5 +1,6 @@
-class API::Controller <  ApplicationController
-  include JWTAuthenticable
+class API::AuthenticatedController < ApplicationController
+  include JwtAuthenticable
+  include APIFormat
 
   rescue_from UnauthorizedError, with: :render_unauthorized
 
