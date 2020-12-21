@@ -38,6 +38,13 @@ gem 'rack-cors'
 gem 'aws-sdk-s3', require: false
 gem 'image_processing'
 
+# explicitly specify sprockets: https://github.com/rails/sprockets/issues/659#issuecomment-659438073
+gem "sprockets-rails", git: 'git://github.com/rails/sprockets-rails.git'
+
+gem 'jwt'
+gem 'devise-jwt', '~> 0.6.0'
+gem 'active_model_serializers', '~> 0.10.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -48,7 +55,7 @@ group :development, :test do
    end
 
    gem 'factory_bot_rails'
-   gem 'table_print'
+   gem 'database_cleaner-active_record'
 end
 
 group :development do

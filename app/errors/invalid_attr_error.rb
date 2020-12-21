@@ -1,0 +1,3 @@
+class InvalidAttrError < StandardError
+
+end
