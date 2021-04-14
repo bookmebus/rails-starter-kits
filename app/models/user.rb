@@ -90,29 +90,24 @@ class User < ApplicationRecord
     return if !profile_pic.attached?
     # ActiveStorage::Current.host = ENV['HOST']
 
-    ActiveStorage::Current.set(host: ENV['HOST'] ) do
-      profile_pic.variant(resize_to_limit: [User::PROFILE_PIC_THUMB, User::PROFILE_PIC_THUMB]).processed.service_url
-    end
+    
+    profile_pic.variant(resize_to_limit: [User::PROFILE_PIC_THUMB, User::PROFILE_PIC_THUMB])
     
   end
 
   def profile_pic_icon_url
     return if !profile_pic.attached?
     # ActiveStorage::Current.host = ENV['HOST']
-
-    ActiveStorage::Current.set(host: ENV['HOST'] ) do
-      profile_pic.variant(resize_to_limit: [User::PROFILE_PIC_ICON, User::PROFILE_PIC_ICON]).processed.service_url
-    end
+    profile_pic.variant(resize_to_limit: [User::PROFILE_PIC_ICON, User::PROFILE_PIC_ICON])
   end
 
   def versioning_storage
     return if !User::PRE_PROCESS_IMAGE
 
     return if !profile_pic.attached?
-    ActiveStorage::Current.set(host: ENV['HOST'] ) do
-      User::profile_pic_variants.each do |variant|
-        profile_pic.variant(resize_to_limit: [variant, variant]).processed.service_url
-      end
+    
+    User::profile_pic_variants.each do |variant|
+      profile_pic.variant(resize_to_limit: [variant, variant])
     end
   end
 
