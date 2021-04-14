@@ -5,7 +5,7 @@ RSpec.describe "API::Registrations", type: :request do
   let(:profile_pic) do
     file = Rails.root.join('spec', 'support', 'assets', 'user', 'profile_pic.jpg')
 
-    ActiveStorage::Blob.create_after_upload!(
+    ActiveStorage::Blob.create_and_upload!(
       io: File.open(file, 'rb'),
       filename: 'profile_pic.jpg',
       content_type: 'image/jpeg' # Or figure it out from `name` if you have non-JPEGs

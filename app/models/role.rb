@@ -4,18 +4,19 @@ class Role < TranslatableRecord
   validates :name, presence: true
   validates :description, presence: true
 
-  enum role_type: [:normal_role, :default_role, :super_admin_role]
+  # You tried to define an enum named "role_type" on the model "Role", but this will generate a instance method "default_role?", which is already defined by Active Record.
+  enum role_type: [:normal_role, :user_role, :super_admin_role]
 
   has_many :users
 
-  def self.ensure_default_role
-    default_role = Role.where(role_type: Role.role_types[:default_role]).first_or_initialize
-    if default_role.new_record?
-      default_role.name = 'Default'
-      default_role.description = 'Default role for user'
-      default_role.save
+  def self.ensure_user_role
+    role = Role.where(role_type: Role.role_types[:user_role]).first_or_initialize
+    if role.new_record?
+      role.name = 'Default'
+      role.description = 'Default role for user'
+      role.save
     end
-    default_role
+    role
   end
 
   def authorize?(key, action)

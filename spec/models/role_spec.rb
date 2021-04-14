@@ -25,27 +25,27 @@ RSpec.describe Role, type: :model do
     expect(role.errors.full_messages).to match(["Description can't be blank"])
   end
 
-  describe '.ensure_default_role' do
+  describe '.ensure_user_role' do
     it 'return create and return the default role if it does not exist' do
       count = Role.count
-      default_role = Role.ensure_default_role
+      user_role = Role.ensure_user_role
       expect(Role.count).to eq(count + 1 )
-      expect(default_role.default_role?).to eq true
-      expect(default_role.name).to eq 'Default'
-      expect(default_role.description).to eq 'Default role for user'
+      expect(user_role.user_role?).to eq true
+      expect(user_role.name).to eq 'Default'
+      expect(user_role.description).to eq 'Default role for user'
     end
 
     it 'return the default role if it already exists' do
      
-      Role.ensure_default_role
+      Role.ensure_user_role
       count = Role.count
 
-      default_role = Role.ensure_default_role
+      user_role = Role.ensure_user_role
 
       expect(Role.count).to eq count
-      expect(default_role.default_role?).to eq true
-      expect(default_role.name).to eq 'Default'
-      expect(default_role.description).to eq 'Default role for user'
+      expect(user_role.user_role?).to eq true
+      expect(user_role.name).to eq 'Default'
+      expect(user_role.description).to eq 'Default role for user'
     end
 
   end
