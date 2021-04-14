@@ -1,0 +1,11 @@
+<div>
+  <% I18n.available_locales.each do |lang| %>
+    <% if(lang == I18n.locale) %>
+      <span class='lang-switcher lang-switcher-disable' style='padding: 5px 20px; color: gray'>
+        <%= lang %>
+      </span>
+    <% else %>
+      <%= link_to lang, request.params.merge(locale: lang), class:'lang-switcher', style: 'padding: 5px 20px;'%>
+    <% end %>
+  <% end %>
+</div>

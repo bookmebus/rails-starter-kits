@@ -1,0 +1,125 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+th:
+  models:
+    user: "ผู้ใช้งาน"
+    tenant: "ผู้เช่า"
+    role: "role"
+    address: "address"
+    quote/address: "address"
+    quote/pickup_address: "pickup address"
+    quote/delivery_address: "delivery address"
+    quote/shipment_item: "shipment Item"
+    quote/contact: "contact"
+    quote/submission: "submission"
+
+  attributes:
+    created_at: "created_at"
+    updated_at: "updated_at"
+
+    title: "Title"
+
+    name: "Name"
+    description: "Description"
+    lat: "Latitude"
+    lon: "Longitude"
+
+    width: "Width"
+    length: "Length"
+    height: "Height"
+    weight: "Weight"
+    weight_unit: "Weight unit"
+    dimension_unit: "Dimensional unit"
+
+    phone_number: "Phone number"
+    email: "Email"
+
+    pickup_address: "Pickup address"
+    delivery_address: "Delivery address"
+    items_count: "จำนวนรวม"
+
+  errors:
+    messages:
+      required: "required"
+      taken: "taken"
+      blank: "can't be blank"
+
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "Validation failed: %{errors}"
+
+    models:
+      role: "role"
+      address: "address"
+      quote/address: "pickup_address"
+      quote/pickup_address: "pickup address"
+      quote/delivery_address: "delivery address"
+      quote/shipment_item: "shipment item"
+      quote/contact: "contact"
+      quote/submission: "submission"
+
+    attributes:
+      role:
+        role_type: "role type"
+
+      quote/contact:
+        title: "title"
+
+  common:
+    actions:
+      new: "new"
+      show: "show"
+      edit: "edit"
+      back: "back"
+      create: "create"
+      update: "update"
+      destroy: "destroy"
+      save: "save"
+      quote: "quote"
+      confirm_destroy: "are you sure to delete this record?"
+
+    honorific_titles:
+      mr: "mr."
+      mrs: "mrs."
+
+    dimensional_units:
+      inch: "inch"
+      foot: "feet"
+      yard: "yard"
+      cm: "centimeter"
+      meter: "meter"
+
+    weight_units:
+      gram: "gram"
+      kg: "kg"
+      lbs: "lbs"

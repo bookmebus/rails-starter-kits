@@ -10,6 +10,16 @@
   </head>
 
   <body>
+    <%= render 'shared/lang_switcher' %>
+    <div>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
+    <ul>
+      <li><%= link_to t("models.user"), users_path %></li>
+      <li><%= link_to t("models.quote/submission"), quote_submissions_path %></li>
+      <li><%= link_to t("models.tenant"), tenants_path%></li>
+    </ul>
     <%= yield %>
   </body>
 </html>

@@ -1,3 +1,59 @@
+GIT
+  remote: git://github.com/rails/sprockets-rails.git
+  revision: c269f5e01fdffa5c41350e855183d94ff33d318a
+  specs:
+    sprockets-rails (3.2.1)
+      actionpack (>= 4.0)
+      activesupport (>= 4.0)
+      sprockets (>= 3.0.0)
+
+GIT
+  remote: https://github.com/rspec/rspec-core.git
+  revision: 257fae1559539a1f1e40b1500bc8522c9e65c5d1
+  branch: master
+  specs:
+    rspec-core (3.10.0.pre)
+      rspec-support (= 3.10.0.pre)
+
+GIT
+  remote: https://github.com/rspec/rspec-expectations.git
+  revision: f34a7a4fe220d2305e5bcf973d34f962d13fa6a2
+  branch: master
+  specs:
+    rspec-expectations (3.10.0.pre)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (= 3.10.0.pre)
+
+GIT
+  remote: https://github.com/rspec/rspec-mocks.git
+  revision: 17d24de0a3cd5ce9496d1195a104b246e6056b9d
+  branch: master
+  specs:
+    rspec-mocks (3.10.0.pre)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (= 3.10.0.pre)
+
+GIT
+  remote: https://github.com/rspec/rspec-rails.git
+  revision: c0a8c22186a1232e3b1612c44bc88052ec56c945
+  branch: master
+  specs:
+    rspec-rails (4.1.0.pre)
+      actionpack (>= 4.2)
+      activesupport (>= 4.2)
+      railties (>= 4.2)
+      rspec-core (= 3.10.0.pre)
+      rspec-expectations (= 3.10.0.pre)
+      rspec-mocks (= 3.10.0.pre)
+      rspec-support (= 3.10.0.pre)
+
+GIT
+  remote: https://github.com/rspec/rspec-support.git
+  revision: 3ae9024527cf1e6797b4385e5b5b13073e2cad23
+  branch: master
+  specs:
+    rspec-support (3.10.0.pre)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -58,6 +114,23 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    aws-eventstream (1.1.0)
+    aws-partitions (1.345.0)
+    aws-sdk-core (3.104.3)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.239.0)
+      aws-sigv4 (~> 1.1)
+      jmespath (~> 1.0)
+    aws-sdk-kms (1.36.0)
+      aws-sdk-core (~> 3, >= 3.99.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.75.0)
+      aws-sdk-core (~> 3, >= 3.104.1)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.1)
+    aws-sigv4 (1.2.1)
+      aws-eventstream (~> 1, >= 1.0.2)
+    bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
@@ -74,14 +147,39 @@ GEM
     childprocess (3.0.0)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
+    devise (4.7.2)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0)
+      responders
+      warden (~> 1.2.3)
+    diff-lcs (1.4.4)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.9.0)
+    factory_bot (6.1.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.1.0)
+      factory_bot (~> 6.1.0)
+      railties (>= 5.0.0)
     ffi (1.13.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    i18n (1.8.3)
+    i18n (1.8.5)
       concurrent-ruby (~> 1.0)
+    image_processing (1.11.0)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
+    interactor (3.1.2)
+    interactor-rails (2.2.1)
+      interactor (~> 3.0)
+      rails (>= 4.2)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
+    jmespath (1.4.0)
+    jwt (2.2.1)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -94,6 +192,7 @@ GEM
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
     mimemagic (0.3.5)
+    mini_magick (4.10.1)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.1)
@@ -101,11 +200,15 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
+    orm_adapter (0.5.0)
+    parallel (1.19.2)
     pg (1.2.3)
     public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -141,6 +244,16 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (1.7.1)
+    responders (3.0.1)
+      actionpack (>= 5.0)
+      railties (>= 5.0)
+    ros-apartment (2.7.2)
+      activerecord (>= 5.0.0, < 6.1)
+      parallel (< 2.0)
+      public_suffix (>= 2.0.5, < 5.0)
+      rack (>= 1.3.6, < 3.0)
+    ruby-vips (2.0.17)
+      ffi (~> 1.9)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -162,18 +275,22 @@ GEM
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (3.2.1)
-      actionpack (>= 4.0)
-      activesupport (>= 4.0)
-      sprockets (>= 3.0.0)
+    table_print (1.5.7)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
+    translateable (0.2.0)
+      activerecord (>= 5.0)
+      activesupport (>= 5.0)
+      i18n
+      pg
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    warden (1.2.8)
+      rack (>= 2.0.6)
     web-console (4.0.4)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -198,20 +315,36 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk-s3
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
+  devise
+  dotenv-rails
+  factory_bot_rails
+  image_processing
+  interactor-rails
   jbuilder (~> 2.7)
+  jwt
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
+  rack-cors
   rails (~> 6.0.3, >= 6.0.3.2)
+  ros-apartment
+  rspec-core!
+  rspec-expectations!
+  rspec-mocks!
+  rspec-rails!
+  rspec-support!
   sass-rails (>= 6)
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
+  sprockets-rails!
+  table_print
+  translateable
   turbolinks (~> 5)
-  tzinfo-data
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)

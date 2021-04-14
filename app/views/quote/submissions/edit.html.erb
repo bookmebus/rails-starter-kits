@@ -1,0 +1,6 @@
+<h1><%= t('models.quote/submission')%></h1>
+
+<%= render 'form', quote_submission: @quote_submission %>
+
+<%= link_to t('common.actions.show'), @quote_submission %> |
+<%= link_to t('common.action.back'), quote_submissions_path %>
