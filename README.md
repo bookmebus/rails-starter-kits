@@ -1,24 +1,32 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Puma dev server with test domain
+The project uses puma-dev server to setup local test domain. The default test domain is https://rails-starter-kits.test ( set up in ENV['ALLOW_HOST_DEV']). By default puma-dev server create a symlink for your project directory name with a symlink under ~/.puma-dev/. this symlink will also be used as the the domain name thus your directory name with [.test] top level domain name, thus
 
-Things you may want to cover:
+```
+directory_name = rails-starter-kits
+top_level_domain = .test
+ENV['ALLOW_HOST_DEV'' > rails-starter-kits.test
+```
+ALLOW_HOST_DEV env var is required because we need to whitelist the domain in rails development environment.
 
-* Ruby version
+### Install Puma dev server
+The installation instruction can be found here: https://github.com/puma/puma-dev#install--setup
 
-* System dependencies
+### Setup puma dev for rails project
+```
+# cd to the root of the rails project
+cd rails-starter-kits
 
-* Configuration
+# to install directory
+puma-dev -install
 
-* Database creation
+# to uninstall
+puma-dev -uninstall
 
-* Database initialization
+# display log 
+tail -f ~/Library/Logs/puma-dev.log
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# restart the server
+touch tmp/restart.txt
+```
