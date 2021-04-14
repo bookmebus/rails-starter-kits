@@ -10,7 +10,7 @@ RSpec.describe Quote::ShipmentItem, type: :model do
   it 'is valid if image is attached' do
     file = Rails.root.join('spec', 'support', 'assets', 'shipment_item', 'wine-box.jpeg')
 
-    image = ActiveStorage::Blob.create_after_upload!(
+    image = ActiveStorage::Blob.create_and_upload!(
       io: File.open(file, 'rb'),
       filename: 'wine-box.jpeg',
       content_type: 'image/jpeg' # Or figure it out from `name` if you have non-JPEGs

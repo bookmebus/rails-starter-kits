@@ -74,7 +74,7 @@ class User < ApplicationRecord
   end
 
   def set_user_role
-    self.role ||= Role.ensure_default_role
+    self.role ||= Role.ensure_user_role
   end
 
   def profile_pic_collection_urls
