@@ -1,11 +1,11 @@
 require 'rails_helper'
 require 'ostruct'
 
-RSpec.describe API::Controller, type: :controller do
+RSpec.describe API::AuthenticatedController, type: :controller do
 
   controller do
     def index
-      render json: { message: :ok}
+      render json: {message: :ok}
     end
   end
 
@@ -23,7 +23,7 @@ RSpec.describe API::Controller, type: :controller do
 
   context "valid token" do
     it "allows request" do
-      token = JWTGenerator.encode(payload)
+      token = JwtGenerator.encode(payload)
       request.headers['Authorization'] = "Bearer #{token}"
 
       get :index
@@ -60,7 +60,7 @@ RSpec.describe API::Controller, type: :controller do
   context 'with expired token' do
     it 'raised Unauthorised parse error' do
       payload[:exp] = 3.day.ago.to_i
-      token = JWTGenerator.encode(payload)
+      token = JwtGenerator.encode(payload)
       request.headers['Authorization'] = "Bearer #{token}"
 
       get :index

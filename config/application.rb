@@ -25,5 +25,14 @@ module Ticketing
     config.i18n.default_locale = :en
     
     config.active_storage.service = :amazon
+
+
+    if(ENV['ASSET_HOST_URL'].present?)
+      config.action_controller.asset_host = ENV['ASSET_HOST_URL'] #"xxx.cloudfront.net"
+    end
+
+     # https://github.com/rails/rails/pull/34477#issuecomment-651467261
+    config.active_storage.resolve_model_to_route = :cdn_proxy if ENV['ACTIVE_STORAGE_CDN'].present?
+    
   end
 end

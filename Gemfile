@@ -42,6 +42,8 @@ gem 'image_processing'
 gem "sprockets-rails", git: 'git://github.com/rails/sprockets-rails.git'
 
 gem 'jwt'
+gem 'devise-jwt', '~> 0.6.0'
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -53,7 +55,6 @@ group :development, :test do
    end
 
    gem 'factory_bot_rails'
-   gem 'table_print'
 end
 
 group :development do
@@ -71,6 +72,7 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem 'database_cleaner-active_record'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
