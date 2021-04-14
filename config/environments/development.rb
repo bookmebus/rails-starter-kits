@@ -61,5 +61,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
 
-  config.hosts << '.lvh.me'
+  config.hosts << ENV['ALLOW_HOST_DEV'] if ENV['ALLOW_HOST_DEV'].present?
 end
