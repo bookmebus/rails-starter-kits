@@ -1,7 +1,124 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
 km:
+  models:
+    user: "អ្នក​ប្រើ"
+    tenant: "អ្នក​ជួល"
+    role: "តួនាទី"
+    address: "អាសយដ្ឋាន"
+    quote/address: "អាសយដ្ឋាន"
+    quote/pickup_address: "អាសយដ្ឋាន លើកឡើង"
+    quote/delivery_address: "អាសយដ្ឋាន ផ្តល់ជូន"
+    quote/shipment_item: "ទំនិញដឹកជញ្ជូន"
+    quote/contact: "ទំនាក់ទំនង"
+    quote/submission: "ផ្តល់តម្លៃ"
+
+  attributes:
+    created_at: "បង្កើតនៅ"
+    updated_at: "បានធ្វើបច្ចុប្បន្នភាពនៅ"
+
+    title: "កិត្តិ"
+
+    name: "ឈ្មោះ"
+    description: "ការពិពណ៌នា"
+    lat: "រយៈទទឹង"
+    lon: "រយៈបណ្តោយ"
+
+    width: "ទទឹង"
+    length: "ប្រវែង"
+    height: "កម្ពស់"
+    weight: "ទំងន់"
+    weight_unit: "ឯកតាទំងន់"
+    dimension_unit: "ឯកតាវិមាត្រ"
+
+    phone_number: "លេខទូរសព្ទ"
+    email: "អ៊ីមែល"
+
+    pickup_address: "អាសយដ្ឋាន លើកឡើង"
+    delivery_address: "អាសយដ្ឋាន ផ្តល់ជូន"
+
+    items_count: "ចំនួនសរុប"
+
+  errors:
+    messages:
+      required: "គឺ​តំរូវ​អោយ​មាន"
+      taken: "ត្រូវបានគេយក"
+      blank: "មិនអាចទទេ"
+
   activerecord:
     errors:
-      models:
-        role:
-          attributes:
-            name: "blank"
+      messages:
+        record_invalid: "Validation failed: %{errors}"
+
+    models:
+      role: "តួនាទី"
+      quote/address: "អាសយដ្ឋាន"
+      quote/pickup_address: "អាសយដ្ឋាន លើកឡើង"
+      quote/delivery_address: "អាសយដ្ឋាន ផ្តល់ជូន"
+      quote/shipment_item: "ទំនិញដឹកជញ្ជូន"
+      quote/contact: "ទំនាក់ទំនង"
+
+    attributes:
+      role:
+        role_type: "ប្រភេទតួនាទី"
+
+      quote/contact:
+        title: "កិត្តិ"
+
+  common:
+    actions:
+      new: "បង្កើត​ថ្មី"
+      show: "បង្ហាញ"
+      edit: "កែប្រែ"
+      back: "ថយក្រោយ"
+      create: "បង្កើត"
+      update: "ធ្វើបច្ចុប្បន្នភាព"
+      destroy: "លុប"
+      save: "រក្សាទុក"
+      quote: "ផ្តល់តម្លៃ"
+      confirm_destroy: "តើអ្នកប្រាកដជាចង់លុបកំណត់ត្រានេះឬ?"
+
+    honorific_titles:
+      mr: "លោក"
+      mrs: "អ្នកស្រី"
+
+    dimensional_units:
+      inch: "អ៊ីញ"
+      foot: "ហ្វីត"
+      yard: "យ៉ាត"
+      cetimeter: "សង់ទីម៉ែត្រ"
+      meter: "ម៉ែត្រ"
+
+    weight_units:
+      gram: "ក្រាម"
+      kg: "គីឡូក្រាម"
+      lbs: "ផោន"
